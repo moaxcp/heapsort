@@ -5,9 +5,11 @@ public class HeapSortSelectHeap {
     public enum Heap { MINHEAP, MAXHEAP };
 
     private Heap heap;
+    private int dary;
 
-    public HeapSortSelectHeap(Heap heap) {
+    public HeapSortSelectHeap(Heap heap, int dary) {
         this.heap = heap;
+        this.dary = dary;
     }
 
     private void swap(int[] list, int i, int j) {
