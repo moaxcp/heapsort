@@ -95,9 +95,9 @@ public class HeapSortSelectHeap {
         }
     }
 
-    public static void runList(int[] list, Heap heap) {
+    public static void runList(int[] list, Heap heap, int nodes) {
         System.out.println("before: " + Arrays.toString(list));
-        new HeapSortSelectHeap(heap).sort(list);
+        new HeapSortSelectHeapSelectNodes(heap, nodes).sort(list);
         System.out.println("after: " + Arrays.toString(list));
     }
 
