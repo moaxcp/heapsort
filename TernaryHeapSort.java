@@ -57,7 +57,7 @@ public class TernaryHeapSort {
     public static void main(String... args) {
         int[] list = {5, 6, 4, 9, 1, 2, 8, 7, 3};
         System.out.println("before: " + Arrays.toString(list));
-        new HeapSort().sort(list);
+        new TernaryHeapSort().sort(list);
         System.out.println("after: " + Arrays.toString(list));
     }
 }
