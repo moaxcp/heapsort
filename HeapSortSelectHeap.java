@@ -33,11 +33,11 @@ public class HeapSortSelectHeap {
         while(root * 2 + 1 <= end) {
             int child = root * 2 + 1;
             int swap = root;
-            if(list[swap] < list[child]) {
+            if(list[swap] > list[child]) {
                 swap = child;
             }
 
-            if(child + 1 <= end && list[swap] < list[child + 1]) {
+            if(child + 1 <= end && list[swap] > list[child + 1]) {
                 swap = child + 1;
             }
 
@@ -58,11 +58,11 @@ public class HeapSortSelectHeap {
         while(root * 2 + 1 <= end) {
             int child = root * 2 + 1;
             int swap = root;
-            if(list[swap] > list[child]) {
+            if(list[swap] < list[child]) {
                 swap = child;
             }
 
-            if(child + 1 <= end && list[swap] > list[child + 1]) {
+            if(child + 1 <= end && list[swap] < list[child + 1]) {
                 swap = child + 1;
             }
 
@@ -75,7 +75,7 @@ public class HeapSortSelectHeap {
         }
     }
 
-    private void heapify(int[] list) {
+    public void heapify(int[] list) {
         int start = (list.length - 2) / 2;
         while(start >= 0) {
             siftDown(list, start, list.length - 1);
@@ -95,14 +95,19 @@ public class HeapSortSelectHeap {
 
     public static void runList(int[] list, Heap heap) {
         System.out.println("before: " + Arrays.toString(list));
-        new HeapSortSelectHeap(heap).sort(list);
+        HeapSortSelectHeap s = new HeapSortSelectHeap(heap);
+        s.heapify(list);
+        System.out.println("heap: " + Arrays.toString(list));
+        s.sort(list);
         System.out.println("after: " + Arrays.toString(list));
     }
 
     public static void main(String... args) {
         int[] list = {5, 6, 4, 9, 1, 2, 0, 8, 7, 3};
+        System.out.println("MINHEAP");
         runList(list, HeapSortSelectHeap.Heap.MINHEAP);
         list = new int[] {7, 9, 2, 6, 4, 1, 0, 3, 5, 8};
+        System.out.println("MAXHEAP");
         runList(list, HeapSortSelectHeap.Heap.MAXHEAP);
     }
 }
