@@ -1,13 +1,13 @@
 import java.util.Arrays;
 
-public class HeapSortSelectHeap {
+public class HeapSortSelectHeapSelectDary {
 
     public enum Heap { MINHEAP, MAXHEAP };
 
     private Heap heap;
     private int dary;
 
-    public HeapSortSelectHeap(Heap heap, int dary) {
+    public HeapSortSelectHeapSelectDary(Heap heap, int dary) {
         this.heap = heap;
         this.dary = dary;
     }
@@ -32,15 +32,14 @@ public class HeapSortSelectHeap {
     private void siftDownMin(int[] list, int start, int end) {
         int root = start;
 
-        while(root * 2 + 1 <= end) {
-            int child = root * 2 + 1;
+        while(root * dary + 1 <= end) {
             int swap = root;
-            if(list[swap] < list[child]) {
-                swap = child;
-            }
+            for(int i = 1; i <= dary; i++) {
+                int child = root * dary + i;
 
-            if(child + 1 <= end && list[swap] < list[child + 1]) {
-                swap = child + 1;
+                if(child <= end && list[swap] > list[child]) {
+                    swap = child;
+                }
             }
 
             if(swap != root) {
@@ -57,15 +56,14 @@ public class HeapSortSelectHeap {
     private void siftDownMax(int[] list, int start, int end) {
         int root = start;
 
-        while(root * 2 + 1 <= end) {
-            int child = root * 2 + 1;
+        while(root * dary + 1 <= end) {
             int swap = root;
-            if(list[swap] > list[child]) {
-                swap = child;
-            }
+            for(int i = 1; i <= dary; i++) {
+                int child = root * dary + i;
 
-            if(child + 1 <= end && list[swap] > list[child + 1]) {
-                swap = child + 1;
+                if(child <= end && list[swap] < list[child]) {
+                    swap = child;
+                }
             }
 
             if(swap != root) {
@@ -77,8 +75,8 @@ public class HeapSortSelectHeap {
         }
     }
 
-    private void heapify(int[] list) {
-        int start = (list.length - 2) / 2;
+    public void heapify(int[] list) {
+        int start = (list.length - dary) / 2;
         while(start >= 0) {
             siftDown(list, start, list.length - 1);
             start -= 1;
@@ -95,16 +93,19 @@ public class HeapSortSelectHeap {
         }
     }
 
-    public static void runList(int[] list, Heap heap, int nodes) {
+    public static void runList(int[] list, Heap heap, int dary) {
         System.out.println("before: " + Arrays.toString(list));
-        new HeapSortSelectHeapSelectNodes(heap, nodes).sort(list);
+        HeapSortSelectHeapSelectDary s = new HeapSortSelectHeapSelectDary(heap, dary);
+        s.heapify(list);
+        System.out.println(heap + ": " + Arrays.toString(list));
+        s.sort(list);
         System.out.println("after: " + Arrays.toString(list));
     }
 
     public static void main(String... args) {
-        int[] list = {5, 6, 4, 9, 1, 2, 0, 8, 7, 3};
-        runList(list, HeapSortSelectHeap.Heap.MINHEAP);
-        list = new int[] {7, 9, 2, 6, 4, 1, 0, 3, 5, 8};
-        runList(list, HeapSortSelectHeap.Heap.MAXHEAP);
+        int[] list = {5, 6, 4, 9, 1, 2, 0, 8, 7, 3, 15, 13, 11, 10, 12};
+        runList(list, HeapSortSelectHeapSelectDary.Heap.MINHEAP, 4);
+        list = new int[] {7, 9, 2, 6, 4, 1, 0, 3, 5, 8, 15, 13, 11, 10, 12};
+        runList(list, HeapSortSelectHeapSelectDary.Heap.MAXHEAP, 4);
     }
 }
